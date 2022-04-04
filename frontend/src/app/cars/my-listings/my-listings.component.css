@@ -1,0 +1,5 @@
+.car-card {
+    border: 2px black dotted;
+    min-height: 25vh;
+    width: 70%;
+}

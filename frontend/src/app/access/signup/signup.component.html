@@ -1,0 +1,53 @@
+<div style="background-image: url('http://pluspng.com/img-png/parking-lot-png-hd-outdoor-parking-lot-filled-with-parked-cars-outside-stock-video-footage-videoblocks-1920.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%; height: 100vh">
+    <div class="col-12" style="top: 20vh; left: 35%; width: 30%; background-color: whitesmoke; padding: 20px">
+        <form [formGroup]="signupForm">
+            <h4>Signup</h4>
+            <div *ngIf="hasAlert || email.touched && email.invalid || password.touched && password.invalid"
+            class="row col-12 alert m-1" [ngClass]="{'alert-danger': alertType === 'red', 'alert-success': alertType === 'green'}">
+                <div *ngIf="hasAlert" class="row col-12">
+                    {{ alertText }}
+                </div>
+                <div class="row col-12" *ngIf="email.touched && email.invalid">
+                    <div class="row col-12" *ngIf="!email.errors.required">
+                        <div *ngIf="email.errors.isEmail">
+                            {{ email.errors.isEmail }}
+                        </div>
+                    </div>
+                    <div *ngIf="email.errors.required" class="row col-12">
+                        Email is required!
+                    </div>
+                </div>
+                <div class="row col-12" *ngIf="password.touched && password.invalid">
+                    <div class="row col-12" *ngIf="!password.errors.required" style="flex-direction: column">
+                        <div *ngIf="password.errors.minLength" class="row m-0">
+                            Password must be at least 5 characters long!
+                        </div>
+                        <div *ngIf="password.errors.strength" class="row m-0">
+                            {{ password.errors.strength }}
+                        </div>
+                    </div>
+                    <div *ngIf="password.errors.required" class="row col-12">
+                        Password is required!
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input class="form-control" formControlName="email" type="text" id="email">
+            </div>
+    
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input class="form-control" formControlName="password" type="password" id="password">
+            </div>
+    
+            <div class="form-group">
+                <button class="btn btn-outline" style="margin-right: 20px" (click)="signup()">Signup</button>
+                <button class="btn btn-outline" (click)="router.navigate(['/login'])">Login</button>
+            </div>
+        </form>
+    </div>
+</div>

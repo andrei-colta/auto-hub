@@ -1,0 +1,14 @@
+.transition-200ms-ease {
+    transition: all 0.2s ease;
+}
+
+.car-card {
+    border: 2px black dotted;
+    min-height: 25vh;
+    width: 70%;
+    cursor: pointer;
+}
+
+.car-card:hover {
+    border: 2px black solid;
+}

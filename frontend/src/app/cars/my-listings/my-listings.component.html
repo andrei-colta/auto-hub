@@ -1,0 +1,85 @@
+<div class="content-wrapper"
+    style="flex-direction: column; font-family: 'Roboto Condensed', sans-serif !important">
+    <div class="row justify-content-center mb-5 pb-4" style="flex-grow: 1; flex-shrink: 1; flex-basis: auto;">
+        <div class="col-12 mb-5 mt-5 d-flex justify-content-center"
+            style="padding: 0 60px; flex-direction: column; flex-grow: 1; flex-basis: auto;">
+            <div class="row">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-12">
+                            <h3 class="text-large">
+                                My Cars
+                            </h3>
+                        </div>
+                    </div>
+
+                    <div class="row" *ngIf="listings?.length === 0">
+                        <div class="col-12">
+                            <h5 class="text-muted">
+                                This is where your listings will appear
+                            </h5>
+                        </div>
+
+                        <div class="col-12">
+                            <button class="but-fade-bln but-sm mt-3" (click)="router.navigate(['/addListing'])">Go to Add Listing</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row car-card m-3 p-2" *ngFor="let l of listings" style="position: relative;">
+                    <div class="row col-12 ml-2">
+                        <div class="row p-2">
+                            <h3>
+                                {{ l.year?.value }} {{ l.maker }} {{ l.model }}
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="row col-12 mb-3">
+                        <div class="col-3" *ngIf="l.displayPicture">
+                            <img src="{{ carsService.getPictureURL + '?fileName=' + l.displayPicture.name }}" alt="" style="max-height: 150px; width: 180px;">
+                        </div>
+                        <div class="col-7">   
+                            <div class="row pl-2">
+                                {{ l.color }} {{ l.engineSize }}cc {{ l.fuelType }} {{ l.bodyType }}
+                            </div>
+    
+                            <div class="row pl-2" *ngIf="l.power">
+                                <strong>
+                                    Power:&nbsp;
+                                </strong>
+                                {{ l.power }}HP
+                            </div>
+                            
+                            <div class="row pl-2" *ngIf="l.mileage">
+                                <strong>
+                                    Mileage:&nbsp;
+                                </strong>
+                                {{ l.mileage }}km
+                            </div>
+    
+                            <div class="row pl-2" *ngIf="l.features && l.features.length > 0">
+                                <strong>
+                                    Features:&nbsp;
+                                </strong>
+                                <span *ngFor="let f of l.features; index as i">
+                                    {{ f }}<span *ngIf="i !== l.features.length - 1">,&nbsp;</span>
+                                </span>
+                            </div>
+    
+                            <div class="row pl-2">
+                                <strong>
+                                    Price:&nbsp;
+                                </strong>
+                                {{ l.price }} EUR
+                            </div>
+                        </div>
+                        <div class="col-2 pb-3 pr-3" style="right: 0; bottom: 0; position: absolute">
+                            <button class="but-fade-bln but-sm mt-3" (click)="router.navigate(['/addListing/' + l._id])">Edit</button>
+                            <button class="but-fade-deny but-sm mt-3 ml-2" (click)="deleteListing(l)">Remove</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+                

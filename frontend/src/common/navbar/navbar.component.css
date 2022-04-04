@@ -1,0 +1,127 @@
+/*navbar hidden state*/
+.hidden {
+    transform: translateY(-3.25rem);
+}
+
+/*transition property of hideable element*/
+.hideable {
+    transition: transform 0.3s ease-out;
+}
+
+/*styling for navbar*/
+.nav-style {
+    z-index: 1000;
+    color: #000000 !important;
+    background: rgb(0, 102, 255);
+    padding: 0 1rem;    
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.38);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.38);
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.38);
+}
+
+/*logo styling*/
+.navbar-brand {
+    padding: 0.8125rem 0.3125rem;
+}
+
+/*nav links styling*/
+.nav-style a {
+    color: #000000;
+}
+
+/*nav button styling*/
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 7.8px 7.8px;
+    transition: background-color 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+/* .nav-item>.text-small {
+    padding: 10px 10px !important;
+} */
+
+.nav-item:hover, .nav-item.show {
+    background: #3625cc;
+    color: white !important;
+}
+
+.nav-item:hover>a, .nav-item.show>a {
+    color: white !important;
+}
+
+.nav-link {
+    height: 30px;
+    box-sizing: content-box;
+    display: flex;
+    flex-direction: row;
+}
+
+.dropdown-toggle::after {
+    margin-left: 5px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.dropdown-menu {
+    top: 7.8px !important;
+    left: -7.8px !important;
+}
+
+.dropdown-menu.right-align {
+    left: initial !important;
+    right: 7.8px;
+}
+
+.dropdown-item {
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.dropdown-item:active {
+    color: white !important;
+    background-color: #3625cc !important;
+}
+
+.nav-content {
+    margin: auto 0;
+}
+
+/*scroll button styling*/
+.but-square-fixed {
+    position: fixed; 
+    bottom: 2em; 
+    right: 2em; 
+    z-index: 500;
+    box-sizing: content-box;
+    border-radius: 10px;
+    border: 2px white solid;
+    background: #862031;
+    color: white;
+    font-size: 1.5rem;
+    padding: 0 !important;
+    width: 2em;
+    height: 2em;
+    outline: none;
+    transition: background 0.2s ease-out;
+}
+
+.but-square-fixed:hover {
+    background: #8d2435;
+}
+
+.but-square-fixed:focus {
+    outline: none;
+}
+
+.but-square-fixed>i {
+    font-size: 2rem;
+    line-height: 2rem;
+}
+
+
+/* .navbar-nav {
+} */
+

@@ -1,0 +1,201 @@
+<div class="content-wrapper d-flex"
+    style="flex-direction: column; font-family: 'Roboto Condensed', sans-serif !important">
+    <div class="row justify-content-center mb-5 pb-4" style="flex-grow: 1; flex-shrink: 1; flex-basis: auto;">
+        <div class="col-12 mt-5 mb-5 d-flex justify-content-center"
+            style="padding: 0 60px; flex-direction: row; flex-grow: 1; flex-basis: auto;">
+            <div class="col-6">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-12">
+                                <h3 class="text-large">
+                                    <span *ngIf="onEdit">Edit</span>
+                                    <span *ngIf="!onEdit">Add a</span>
+                                     Car Listing
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row my-3 mr-2 p-3" *ngIf="showAlert">
+                    <div class="col-12 alert-danger" *ngIf="alertType === 'danger'">
+                        {{ alertText }}
+                    </div>
+
+                    <div class="col-12 alert-success" *ngIf="alertType === 'success'">
+                        {{ alertText }}
+                    </div>
+                </div>
+    
+                <div class="row">
+                    <div class="row mt-2" style="width: 100%">
+                        <div class="col-4 col-lg-6">
+                            <ng-select *ngIf="allBrands" bindLabel="name" bindValue="name" groupBy="country" placeholder="Maker" [items]="allBrands" [(ngModel)]="maker" (change)="getModels()">
+                                <ng-template ng-label-tmp let-item="item">
+                                    <img class="mr-1" height="18" [src]="item.logo"/>
+                                    {{ item.name }}
+                                </ng-template>
+                                <ng-template ng-optgroup-tmp let-item="item" let-index="index" style="background-color: rgba(0, 0, 0, 0.04);">
+                                    {{ item.country }}<img class="ml-1" height="20" [src]="getCountry(item.country).flag"/>
+                                </ng-template>
+                            </ng-select>
+                        </div>
+                        <div class="col-4 col-lg-6">
+                            <ng-select *ngIf="allModels" bindLabel="name" bindValue="name" placeholder="Model" [disabled]="allModels.length === 0" [items]="allModels" [(ngModel)]="model"></ng-select>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="row">
+                    <div class="row mt-2" style="width: 100%">
+                        <div class="col-4 col-lg-6" style="top: -10px">
+                            <label class="label-bln-nosep" [ngClass]="{'label-bln-active': (mileage)}" for="mileage">
+                                Mileage (km)
+                            </label>
+                            <input class="input-bln" style="width: 100%; flex-grow: 1" id="mileage" [(ngModel)]="mileage">
+                        </div>
+                        <div class="col-4 col-lg-6">
+                            <ng-select placeholder="Year" [items]="allYears" [(ngModel)]="year"></ng-select>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="row">
+                    <div class="row mt-2" style="width: 100%">
+                        <div class="col-4 col-lg-6">
+                            <ng-select *ngIf="allFuelTypes" bindLabel="name" bindValue="name" placeholder="Fuel type" [items]="allFuelTypes" [(ngModel)]="fuelType"></ng-select>
+                        </div>
+                        <div class="col-4 col-lg-6">
+                            <ng-select *ngIf="allBodyTypes" bindLabel="name" bindValue="name" placeholder="Body type" [items]="allBodyTypes" [(ngModel)]="bodyType"></ng-select>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="row">
+                    <div class="row mt-2" style="width: 100%">
+                        <div class="col-4 col-lg-6">
+                            <label class="label-bln-active" for="description">
+                                Short Description
+                            </label>
+                            <textarea class="input-bln" style="width: 100%; flex-grow: 1" id="description" [(ngModel)]="description">
+                            </textarea>
+                        </div>
+                        <div class="col-4 col-lg-6">
+                            <ng-select *ngIf="allColors" bindLabel="name" bindValue="name" placeholder="Color" [items]="allColors" [(ngModel)]="color"></ng-select>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="row">
+                    <div class="row mt-2" style="width: 100%">
+                        <div class="col-4 col-lg-6">
+                            <label class="label-bln-nosep" [ngClass]="{'label-bln-active': (price)}" for="price">
+                                Price (EUR)
+                            </label>
+                            <input class="input-bln" style="width: 100%; flex-grow: 1" id="price" [(ngModel)]="price">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="row mt-5">
+                    <div class="row mt-2" style="width: 100%">
+                        <div class="col-4 col-lg-12">
+                            <ng-select
+                                *ngIf="allFeatures"
+                                class="pt-3"
+                                [items]="allFeatures"
+                                [multiple]="true"
+                                [closeOnSelect]="false"
+                                [hideSelected]="true"
+                                bindLabel="name"
+                                bindValue="name"
+                                placeholder="Features"
+                                [(ngModel)]="features">
+                            </ng-select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="row mt-2" style="width: 100%">
+                        <div class="col-4 col-lg-6">
+                            <label class="label-bln-nosep" [ngClass]="{'label-bln-active': (engineSize)}" for="engineSize">
+                                Engine Size (cc)
+                            </label>
+                            <input class="input-bln" style="width: 100%; flex-grow: 1" id="engineSize" [(ngModel)]="engineSize">
+                        </div>
+                        <div class="col-4 col-lg-6">
+                            <label class="label-bln-nosep" [ngClass]="{'label-bln-active': (power)}" for="power">
+                                Power (HP)
+                            </label>
+                            <input class="input-bln" style="width: 100%; flex-grow: 1" id="power" [(ngModel)]="power">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-2" *ngIf="onEdit">
+                    <div class="col-12">
+                        <h4 class="mt-2" style="text-align: center">Pictures</h4>
+                    </div>
+                </div>
+                <div class="row mt-2" style="justify-content: center" *ngIf="onEdit">
+                    <button class="but-fade-bln but-sm mt-3" (click)="fileInput.click()">
+                        Add Picture
+                    </button>
+                </div>
+                <input class="form-control" style="display: none" type="file" accept="image/*"
+                    (change)="addFiles($event)" #fileInput multiple/>
+                <div class="row mt-3">
+                    <div *ngFor="let pic of myPictures" class="pic mr-1" [ngClass]="{ 'pic-selected': selectedPic === pic }" (click)="selectedPic = pic">
+                        <span class="close unselectable" (click)="deletePicture(pic)">&times;</span>
+                        <img src="{{carsService.getPictureURL + '?fileName=' + pic.name}}" alt="" style="height: 100px">
+                    </div>
+                </div>
+                <div *ngIf="imageChangedEvent" style="display: block;">
+                    <hr class="mt-5" style="margin-left: 0; margin-right:0">
+                    <div class="row mt-2" [style.visibility]="CropTitleVisible ? 'visible' : 'hidden'">
+                        <div class="col-12">
+                            <h4 style="text-align:center">
+                                Crop Pic
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col-12">
+                            <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true"
+                                [aspectRatio]="3 / 3" [resizeToWidth]="256" [roundCropper]="true" format="png"
+                                (imageCroppedBase64)="imageCropped($event)" (imageLoaded)="imageLoaded()"
+                                (loadImageFailed)="loadImageFailed()" (imageCroppedFile)="imageCroppedFile($event)"
+                                style="max-height: 33vh" [style.display]="cropperReady ? null : 'none'">
+                            </image-cropper>
+                        </div>
+                    </div>
+                    <div class="row mt-3" style="justify-content: center; margin-top: 20px">
+                        <button class="access-but but-sm" (click)="upload()"
+                            [disabled]="(!selectedFile && uploadPic)">
+                            Upload
+                        </button>
+
+                        <button class="deny-but but-sm" (click)="cancelEditPicture()"
+                            [disabled]="(!selectedFile && uploadPic)" style="margin-left: 20px">
+                            Cancel
+                        </button>
+                    </div>
+                    <hr class="mt-4" style="margin-left: 0; margin-right:0">
+                </div>
+            </div>
+        </div>
+        <button class="but-fade-bln but-sm mt-3 mr-2" (click)="addListing()">
+            <span *ngIf="onEdit">Save</span>
+            <span *ngIf="!onEdit">Add</span>
+             Listing
+        </button>
+
+        <button class="but-fade-deny but-sm mt-3" (click)="revertChanges()" *ngIf="onEdit">
+            Revert Changes
+        </button>
+    </div>
+</div>
+            

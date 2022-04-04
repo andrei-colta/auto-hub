@@ -1,0 +1,74 @@
+<nav class="navbar navbar-expand-md fixed-top hideable nav-style unselectable" [ngClass]="{'hidden':scrollingDown}" #navWrap>
+    <!-- Logo -->
+    <a routerLink='' class="navbar-brand">AutoHUB</a>
+    <!-- Hamburger button for collapsing nav on small screens -->
+    <button class="navbar-toggler hidden-sm-up" style="color: #49d37b" type="button" (click)="isNavbarCollapsed = !isNavbarCollapsed" data-target="#navbarsDefault" aria-controls="navbarsDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars"></i>
+    </button>
+    <!-- Menu -->
+    <div [ngbCollapse]="isNavbarCollapsed" class="collapse navbar-collapse" style="transition: all 0.3s ease" id="navbarsDefault">
+        <ul class="navbar-nav ml-md-5 mr-auto">
+            <li class="nav-item">
+                <a routerLink='' class="nav-link d-block">
+                    <p class="my-auto mx-0 d-flex justify-content-center" style="flex-direction: column; height: 100%">
+                        Home
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a routerLink='/search' class="nav-link d-block">
+                    <p class="my-auto mx-0 d-flex justify-content-center" style="flex-direction: column; height: 100%">
+                        Search
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a routerLink='/addListing' class="nav-link d-block">
+                    <p class="my-auto mx-0 d-flex justify-content-center" style="flex-direction: column; height: 100%">
+                        Add Listing
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a routerLink='/myListings' class="nav-link d-block">
+                    <p class="my-auto mx-0 d-flex justify-content-center" style="flex-direction: column; height: 100%">
+                        My Cars
+                    </p>
+                </a>
+            </li>
+        </ul>
+        <ul class="navbar-nav mr-md-5 ml-auto">
+            <li class="nav-item" *ngIf="!isLogged">
+                <a routerLink='login' class="nav-link text-small">
+                    <p class="my-auto mx-0 d-flex justify-content-center" style="flex-direction: column; height: 100%">
+                        Login
+                    </p>
+                </a>
+            </li>        
+            <li class="nav-item" *ngIf="!isLogged">
+                <a routerLink='signup' class="nav-link text-small">
+                    <p class="my-auto mx-0 d-flex justify-content-center" style="flex-direction: column; height: 100%">
+                        Sign up
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item" *ngIf="isLogged">
+                <a class="nav-link" id="id03" (click)="router.navigate(['/edit-profile/'])">
+                    <img class="mr-3" *ngIf="picture === 'https://i.stack.imgur.com/34AD2.jpg'" src="{{ picture }}" style="height: 35px; width: 35px; border-radius: 100%; border: 0.75px solid #3625cc"> 
+                    <img class="mr-3" *ngIf="picture !== 'https://i.stack.imgur.com/34AD2.jpg'" src="{{ accessService.getPictureURL + '?fileName=' + picture }}" style="height: 35px; width: 35px; border-radius: 100%; border: 0.75px solid #3625cc"> 
+                    <p class="my-auto mx-0 d-flex justify-content-center" style="flex-direction: column; height: 100%">
+                        <span *ngIf="firstName">{{ firstName }}</span>
+                        <span *ngIf="!firstName">{{ email }}</span>
+                    </p>
+                </a>
+            </li>      
+            <li class="nav-item" *ngIf="isLogged">
+                <a routerLink='login' class="nav-link text-small" (click)="accessService.logout()">
+                    <p class="my-auto mx-0 d-flex justify-content-center" style="flex-direction: column; height: 100%">
+                        Logout
+                    </p>
+                </a>
+            </li>      
+        </ul>
+    </div>
+</nav>

@@ -1,0 +1,38 @@
+<div style="background-image: url('http://pluspng.com/img-png/parking-lot-png-hd-outdoor-parking-lot-filled-with-parked-cars-outside-stock-video-footage-videoblocks-1920.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%; height: 100vh">
+    <div class="col-12" style="top: 20vh; left: 35%; width: 30%; background-color: rgb(245, 245, 245, .8); padding: 20px">
+        <form [formGroup]="loginForm">
+            <h4>Login</h4>
+            <div *ngIf="hasAlert || email.touched && email.invalid || password.touched && password.invalid" 
+            class="row col-12 alert alert-danger m-1">
+                {{ alertText }}
+                <div class="row col-12" *ngIf="email.touched && email.invalid">
+                    <div *ngIf="email.errors.required" class="row col-12">
+                        Email is required!
+                    </div>
+                </div>
+                <div class="row col-12" *ngIf="password.touched && password.invalid">
+                    <div *ngIf="password.errors.required" class="row col-12">
+                        Password is required!
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input class="form-control" formControlName="email" type="text" id="email">
+            </div>
+        
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input class="form-control" formControlName="password" type="password" id="password">
+            </div>
+        
+            <div class="form-group">
+                <button class="btn btn-outline" style="margin-right: 20px" (click)="login()">Login</button>
+                <button class="btn btn-outline" (click)="router.navigate(['/signup'])">Signup</button>
+            </div>
+        </form>
+    </div>
+</div>

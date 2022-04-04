@@ -1,0 +1,49 @@
+<div class="content-wrapper d-flex justify-content-center" style="font-family: 'Lato', sans-serif !important;">
+    <div class="row justify-content-center mb-3 pb-4" style="width: 100%">
+        <div class="col-12 mt-5 mb-5" style="padding-left: 48px; padding-right: 48px;">
+            <div class="row">
+                <div class="col-4 col-xl-3">
+                    <div class="row">
+                        <div class="col-12 d-flex justify-content-center"
+                            style="flex-direction: column; align-items: center">
+                            <img src="{{profileData.picture}}" alt="" style="height: 180px; width: 180px;"
+                                class="mb-3 img-fluid d-block rounded-circle box-shadow-center-down">
+                            <p class="text-medium mb-1" style="text-align: center">{{profileData.firstName}}</p>
+                            <p class="text-medium mb-0" style="text-align: center">{{profileData.lastName}}</p>
+                        </div>
+                    </div>
+                    <div class="col-12 d-flex" style="flex-direction: column;">
+                        <ul class="list-unstyled pl-4 mt-1">
+                            <li class="d-flex my-3" style="flex-direction: column">
+                                <span class="label-nasp">Email</span>
+                                {{profileData.email}}
+                            </li>
+                            <li class="d-flex my-3" style="flex-direction: column">
+                                <span class="label-nasp">Country</span>
+                                {{profileData.country}}
+                            </li>
+                            <li class="d-flex my-3" style="flex-direction: column">
+                                <span class="label-nasp">City</span>
+                                {{profileData.city}}
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="row" *ngIf="profile_id === user_id">
+                        <div class="col-12 d-flex" style="flex-direction: column; justify-content: center">
+                            <button (click)="router.navigate(['edit-profile/'])"
+                                class="but-sm access-but mx-4">Edit your profile</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-8 col-xl-8">
+                    <h2 class="mb-4">Events</h2>
+
+                    <div *ngFor="let e of myEvents" class="container">
+                        Became friends with {{ e.firstName }} {{ e.lastName }} on {{ e.dt_send.split('T')[0] }}.
+                        <hr class="mx-0">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

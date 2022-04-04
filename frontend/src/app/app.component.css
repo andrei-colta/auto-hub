@@ -1,0 +1,11 @@
+.router-outlet {
+    font-size: 1rem;
+    perspective: 2px;
+    position: relative;
+    padding-top: 55.58px;
+    transition: padding 0.3s ease-out;
+}
+
+.no-pad {
+    padding-top: 0 !important;
+}

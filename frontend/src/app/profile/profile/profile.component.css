@@ -1,0 +1,6 @@
+.circle-sm {
+    display: inline-block;
+    height: 13px; 
+    width: 13px;
+    border-radius: 50%;
+}

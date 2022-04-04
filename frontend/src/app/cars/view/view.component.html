@@ -1,0 +1,154 @@
+<div class="content-wrapper d-flex"
+    style="flex-direction: column; font-family: 'Roboto Condensed', sans-serif !important">
+    <div class="row justify-content-center pb-4" style="flex-grow: 1; flex-shrink: 1; flex-basis: auto;">
+        <div class="col-12 mt-5 mb-5 d-flex justify-content-center"
+            style="padding: 0 60px; flex-direction: row; flex-grow: 1; flex-basis: auto;">
+            <div class="col-12">
+                <div class="row col-12" *ngIf="carData">
+                    <!-- <div class="row col-12">
+                        <div class="col-6">
+                            <h3 class="text-large">
+                                {{ carData.year.label }} {{ carData.maker }} {{ carData.model }}
+                            </h3>
+                            <h5><span style="font-size: 30px;">{{ carData.price }}</span> EUR</h5>
+                        </div>
+                    </div> -->
+                    <!-- <div class="row mt-2 col-12" *ngIf="pictures">
+                        <h4>Pictures ({{ pictures.length }})</h4>
+                    </div>
+                    <div class="row mt-3 col-12" *ngIf="pictures" style="height: 150px">
+                        <div *ngFor="let pic of pictures | slice:0:5" class="pic mr-2" [ngClass]="{ 'pic-selected': selectedPic === pic }" (click)="viewPicture(pic)">
+                            <i class="view fa fa-search-plus"></i>
+                            <img src="{{carsService.getPictureURL + '?fileName=' + pic}}" alt="" style="height: 150px">
+                        </div>
+                    </div> -->
+
+                    <div class="row mt-3 col-8" *ngIf="pictures && pictures.length > 0">
+                        <div class="row col-12">
+                            <div class="row col-12">
+                                <h3 class="text-large">
+                                    {{ carData.year?.value }} {{ carData.maker }} {{ carData.model }}
+                                </h3>
+                            </div>
+                            <div class="row col-12">
+                                <h5><span style="font-size: 30px;">{{ carData.price }}</span> EUR</h5>
+                            </div>
+                            <!-- <div class="col-6">
+                            </div> -->
+                        </div>
+                        <div class="row col-12">
+                            <div class="numbertext" style="color: white; background-color: rgba(0, 0, 0, 0.8);">{{ pictures.indexOf(selectedPic) + 1}} / {{ pictures.length }}</div>
+                            <img class="modal-content" src="{{ carsService.getPictureURL + '?fileName=' + selectedPic.name }}" (click)="viewPicture()" style="cursor: pointer;">
+                            <a class="prev" (click)="changePic(-1)">&#10094;</a>
+                            <a class="next" (click)="changePic(1)">&#10095;</a>
+                        </div>
+                        <div class="row col-12 pr-0">
+                            <div class="row mt-3 col-12 pr-0" *ngIf="pictures" style="max-height: 8vh">
+                                <div *ngFor="let pic of pictures; index as i">
+                                    <div class="pic mr-2" [ngClass]="{ 'pic-selected': selectedPic === pic }" (click)="selectedPic = pic"
+                                    *ngIf="i !== pictures.indexOf(selectedPic) &&
+                                    ((pictures.indexOf(selectedPic) < picsInPreview && i < picsInPreview) ||
+                                    (pictures.indexOf(selectedPic) >= picsInPreview && (pictures.indexOf(selectedPic) - i < picsInPreview)
+                                    && pictures.indexOf(selectedPic) - i > 0))">
+                                        <!-- <i class="view fa fa-search-plus"></i> -->
+                                        <img src="{{carsService.getPictureURL + '?fileName=' + pic.name}}" alt="" style="max-height: 8vh">
+                                    </div>
+                                    <div class="pic mr-2" [ngClass]="{ 'pic-selected': selectedPic === pic }" (click)="selectedPic = pic"
+                                    *ngIf="i === pictures.indexOf(selectedPic)">
+                                        <!-- <i class="view fa fa-search-plus"></i> -->
+                                        <img src="{{carsService.getPictureURL + '?fileName=' + pic.name}}" alt="" style="max-height: 8vh">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row col-4 mb-3 mt-5 ml-3">
+                        <div class="col-12">
+                            <div class="row mb-5 col-12" *ngIf="userData">
+                                <div class="row pl-2 col-12">
+                                    <h5>Listed by {{ userData.firstName }}</h5>
+                                </div>
+                                <div class="row p-2 col-12" style="text-align: center;">
+                                    <strong>
+                                        {{ userData.phone }}
+                                    </strong>
+                                </div>
+                                <div class="row p-2 col-12" style="text-align: center;" *ngIf="userData.city">
+                                    City: {{ userData.city }}
+                                </div>
+                            </div>
+                            <div class="row pl-2">
+                                <strong>
+                                    Price:&nbsp;
+                                </strong>
+                                {{ carData.price }} EUR
+                            </div>
+    
+                            <div class="row pl-2" *ngIf="carData.power">
+                                <strong>
+                                    Power:&nbsp;
+                                </strong>
+                                {{ carData.power }}HP
+                            </div>
+                            
+                            <div class="row pl-2" *ngIf="carData.mileage">
+                                <strong>
+                                    Mileage:&nbsp;
+                                </strong>
+                                {{ carData.mileage }}km
+                            </div>
+
+                            <div class="row pl-2">
+                                <strong>
+                                    Engine:&nbsp;
+                                </strong>
+                                {{ carData.engineSize }}cc {{ carData.fuelType }}
+                            </div>
+
+                            <div class="row pl-2">
+                                <strong>
+                                    Body Type:&nbsp;
+                                </strong>
+                                {{ carData.bodyType }}
+                            </div>
+
+                            <div class="row pl-2">
+                                <strong>
+                                    Color:&nbsp;
+                                </strong>
+                                {{ carData.color }}
+                            </div>
+
+                            <div class="row pl-2" *ngIf="carData.features && carData.features.length > 0">
+                                <strong>
+                                    Features:&nbsp;
+                                </strong>
+                                <span *ngFor="let f of carData.features; index as i">
+                                    {{ f }}<span *ngIf="i !== carData.features.length - 1">,&nbsp;</span>
+                                </span>
+                            </div>
+
+                            <div class="row pl-2">
+                                <strong>
+                                    Description:&nbsp;
+                                </strong>
+                                {{ carData.description }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="myModal" class="modal unselectable" *ngIf="showModal">
+        <!-- The Close Button -->
+        <span class="close" (click)="closeModal()">&times;</span>
+        
+        <!-- Modal Content (The Image) -->
+        <img class="modal-content-big" src="{{ carsService.getPictureURL + '?fileName=' + selectedModalPic }}">
+        <div class="numbertext">{{ pictures.indexOf(selectedModalPic) + 1}} / {{ pictures.length }}</div>
+        <a class="prev" (click)="changeModalPic(-1)">&#10094;</a>
+        <a class="next" (click)="changeModalPic(1)">&#10095;</a>
+    </div>
+</div>

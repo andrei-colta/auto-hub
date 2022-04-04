@@ -1,0 +1,113 @@
+<div class="content-wrapper d-flex justify-content-center" style="flex-flow: column; font-family: 'Lato', sans-serif !important;">
+    <div class="row justify-content-center mb-5 pb-4" style="width: 100%">
+        <div class="col-12">
+            <div class="container-fluid justify-content-center">
+                <div class="row mt-5 justify-content-center">
+                    <div class="col-lg-6">
+                        <div class="row">
+                            <div class="col-12">
+                                <h4 class="mt-2" style="text-align: center">Change Pic</h4>
+                            </div>
+                        </div>
+                        <div class="row mt-4" style="justify-content: center">
+                            <div class="col-12 justify-content-center d-flex">
+                                <a href="#" (click)="$event.preventDefault();"> <img src="{{ this.profileService.getPictureURL + '?fileName=' + myPicture }}"
+                                        class="img-fluid d-inline rounded-circle box-shadow-center-down"
+                                        style="object-fit:cover; width:35vh; height:35vh" (click)="fileInput.click()"
+                                        pTooltip="Click image to upload and change your profile picture" *ngIf="myPicture"
+                                        tooltipPosition="right" showDelay="500" hideDelay="4500" tooltipZIndex="1"></a>
+                            </div>
+                        </div>
+                        <input class="form-control" style="display: none" type="file" accept="image/*"
+                            (change)="createFormData($event)" #fileInput />
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="col-12">
+                            <h1>Edit Profile</h1>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-12 d-flex mt-1" style="flex-direction: column">
+                                <label for="gender" class="label-bln-nosep label-bln-active">Email</label>
+                                <div class="d-flex" style="width:100%; flex-direction: row">
+                                    <input type="text" class="input-bln disabled-cur" id="email" style="flex-grow: 1"
+                                        [(ngModel)]="profileData.email">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-12 d-flex mt-1" style="flex-direction: column">
+                                <label for="firstName" class="label-bln-nosep"
+                                    [ngClass]="{'label-bln-active': (profileData.firstName !== '')}">
+                                    First Name
+                                </label>
+                                <div class="d-flex" style="width:100%; flex-direction: row">
+                                    <input type="text" class="input-bln" id="firstName" style="flex-grow: 1"
+                                        [(ngModel)]="profileData.firstName">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-12 d-flex mt-1" style="flex-direction: column">
+                                <label for="lastName" class="label-bln-nosep"
+                                    [ngClass]="{'label-bln-active': (profileData.lastName !== '')}">
+                                    Last Name
+                                </label>
+                                <div class="d-flex" style="width:100%; flex-direction: row">
+                                    <input type="text" class="input-bln" id="lastName" style="flex-grow: 1"
+                                        [(ngModel)]="profileData.lastName">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-12 d-flex mt-1" style="flex-direction: column">
+                                <label for="phone" class="label-bln-nosep"
+                                    [ngClass]="{'label-bln-active': (profileData.phone !== '')}">
+                                    Phone
+                                </label>
+                                <div class="d-flex" style="width:100%; flex-direction: row">
+                                    <input type="text" class="input-bln" id="phone" style="flex-grow: 1"
+                                        [(ngModel)]="profileData.phone">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-3">
+                            <div class="row">
+                                <div class="col-12">
+                                    <label for="birthday" style="font-size: 13.6px; color: #666">Birthday</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12" #birthdayDiv>
+                                    <p-calendar [(ngModel)]="profileData.birthday" id="birthday" type="date"
+                                        dateFormat="dd MM yy" [yearNavigator]="true" [monthNavigator]="true"
+                                        [yearRange]="'1900:2019'" [maxDate]="today" placeholder="Birthday"
+                                        [showIcon]="true">
+                                    </p-calendar>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-6">
+                                <ng-select id="city" #city [items]="cities" [(ngModel)]="profileData.city"
+                                    [virtualScroll]="true" [ngModelOptions]="{standalone: true}" [searchFn]="searchCity"
+                                    placeholder="City" style="padding: 0" *ngIf="cities" bindLabel="name" bindValue="name">
+                                </ng-select>
+                            </div>
+                        </div>
+
+                        <div class="mt-5">
+                            <button class="btn btn-outline mr-3" (click)="updateProfile()">Save Changes</button>
+                            <button class="btn btn-outline-danger" (click)="getProfile()">Revert Changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
